@@ -29,10 +29,10 @@ if ! [ -d "$mount_dir" ]; then
 fi
 
 umount_all() {
-  umount $mount_dir/dev/pts > /dev/null || true
-  umount $mount_dir/dev/ > /dev/null || true
-  umount $mount_dir/sys/ > /dev/null || true
-  umount $mount_dir/proc/ > /dev/null || true
+  umount $mount_dir/dev/pts > /dev/null 2>&1 || true
+  umount $mount_dir/dev/ > /dev/null 2>&1 || true
+  umount $mount_dir/sys/ > /dev/null 2>&1|| true
+  umount $mount_dir/proc/ > /dev/null 2>&1 || true
 }
 
 if [ "$(id -u)" -eq 0 ]; then # rooted
