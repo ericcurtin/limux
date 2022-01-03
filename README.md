@@ -4,7 +4,7 @@ Linux (fedora 35 default) chroot in an Android environment
 
 # To install and use
 
-- rooted phone, this is device specific on how to complete. Many Android devices get wiped clean when you unlock the bootloader (such as my Moto G 5G Plus) or root the phone, so back up your data. It's a security feature.
+- rooted phone, this is device specific on how to complete. Many Android devices get wiped clean when you unlock the bootloader (such as my Moto G 5G Plus) or root the phone, so back up your data. It's a security feature. Technically this is optional, but unrooted version does not perform as well.
 
 - Download and install open source app store F-Droid:
 
