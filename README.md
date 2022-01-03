@@ -10,7 +10,7 @@ Linux (fedora 35 default) chroot in an Android environment
 
   https://f-droid.org/F-Droid.apk
 
-- Install termux from F-Droid
+- Install termux from F-Droid (Google Play version of termux is not recommended, it's drastically out of date)
 
 - Configure sshd for termux (optional):
 
