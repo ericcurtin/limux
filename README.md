@@ -24,3 +24,7 @@ Linux (fedora 35 default) chroot in an Android environment
 
   `curl -LO https://raw.githubusercontent.com/ericcurtin/limux/main/limux.sh && chmod +x limux.sh && sudo ./limux.sh`
 
+- For each sequent run of the environment, it's simply:
+
+  sudo ./limux.sh
+
