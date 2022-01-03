@@ -22,5 +22,5 @@ Linux (fedora 35 default) chroot in an Android environment
 
 - Open termux and run:
 
-  `curl -LO https://raw.githubusercontent.com/ericcurtin/limux/main/limux.sh && chmod +x limux.sh && ./limux.sh`
+  `curl -LO https://raw.githubusercontent.com/ericcurtin/limux/main/limux.sh && chmod +x limux.sh && sudo ./limux.sh`
 
