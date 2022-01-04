@@ -45,5 +45,4 @@ Linux (fedora 35 default, centos stream 9 also available) chroot in an Android (
   sudo ./limux.sh fedora:35 ui
   ```
 
-![4c5c70a1-8b8f-471a-9296-0b1539ee661f](https://user-images.githubusercontent.com/1694275/148059048-5ecb2416-51fd-40d8-bf89-7b9e9e8c0a4a.png)
-
+![Screenshot (4 Jan 2022 15_28_08)](https://user-images.githubusercontent.com/1694275/148082696-b2391cf1-cbc5-4be5-8851-fccfa6c6ebb3.png)
