@@ -1,6 +1,6 @@
 # limux
 
-Linux (fedora 35 default) chroot in an Android (work with standard GNU/Linux also)  environment
+Linux (fedora 35 default, centos stream 9 also available) chroot in an Android (work with standard GNU/Linux also)  environment
 
 # To install and use
 
