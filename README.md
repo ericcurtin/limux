@@ -1,6 +1,6 @@
 # limux
 
-Linux (fedora 35 default) chroot in an Android environment
+Linux (fedora 35 default) chroot in an Android (work with standard GNU/Linux also)  environment
 
 # To install and use
 
@@ -27,4 +27,8 @@ Linux (fedora 35 default) chroot in an Android environment
 - For each sequent run of the environment, it's simply:
 
   sudo ./limux.sh
+
+- In the script there are some commented out steps that will get a UI and sound working with XServer XSDL (optional)
+
+![4c5c70a1-8b8f-471a-9296-0b1539ee661f](https://user-images.githubusercontent.com/1694275/148059048-5ecb2416-51fd-40d8-bf89-7b9e9e8c0a4a.png)
 
