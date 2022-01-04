@@ -86,12 +86,13 @@ else # unrooted
 fi
 
 # Run the following for UI and sound
+# dnf group install -y "Fedora Workstation"
+# dnf install -y gnome-flashback dbus-x11
 # export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 # pkill dbus
+# pkill gnome
 # mkdir /run/dbus
 # rm -f "/var/run/dbus/pid"
 # dbus-daemon --system --fork
-# dnf group install -y "Fedora Workstation"
-# dnf install -y gnome-flashback dbus-x11
-# exec dbus-launch --exit-with-session  /usr/libexec/gnome-flashback-metacity
+# dbus-launch --exit-with-session  /usr/libexec/gnome-flashback-metacity
 
