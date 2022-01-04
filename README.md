@@ -26,7 +26,7 @@ Linux (fedora 35 default) chroot in an Android (work with standard GNU/Linux als
 
 - For each sequent run of the environment, it's simply:
 
-  sudo ./limux.sh
+  `sudo ./limux.sh`
 
 - In the script there are some commented out steps that will get a UI and sound working with XServer XSDL (optional)
 
