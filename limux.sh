@@ -78,9 +78,9 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
 pkill dbus
 pkill gnome
 mkdir -p /run/dbus
-rm -f "/var/run/dbus/pid"
+rm -f /var/run/dbus/pid
 dbus-daemon --system --fork
-dbus-launch --exit-with-session  /usr/libexec/gnome-flashback-metacity > /dev/null 2>&1 &"
+dbus-launch --exit-with-session /usr/libexec/gnome-flashback-metacity > /dev/null 2>&1 &"
   fi
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
