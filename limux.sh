@@ -65,6 +65,8 @@ umount_all() {
 if [ "$(id -u)" -eq 0 ]; then # rooted
   umount_all
 
+  mkdir -p /dev/shm # chromium requires this
+  mountpoint -q /dev/shm || mount -o rw,nosuid,nodev,mode=1777 -t tmpfs tmpfs /dev/shm
   mountpoint -q $mnt_dir/proc || mount -t proc proc $mnt_dir/proc
   mountpoint -q $mnt_dir/sys || mount -t sysfs sys $mnt_dir/sys
   mountpoint -q $mnt_dir/dev || mount -o bind /dev $mnt_dir/dev
