@@ -85,12 +85,13 @@ else # unrooted
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 fi
 
-# Run the following for UI
-# export DISPLAY=:0
+# Run the following for UI and sound
+# export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 # pkill dbus
+# mkdir /run/dbus
 # rm -f "/var/run/dbus/pid"
 # dbus-daemon --system --fork
 # dnf group install -y "Fedora Workstation"
-# dnf install -y gnome-flashback
-# /usr/libexec/gnome-flashback-metacity
+# dnf install -y gnome-flashback dbus-x11
+# exec dbus-launch --exit-with-session  /usr/libexec/gnome-flashback-metacity
 
