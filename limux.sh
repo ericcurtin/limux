@@ -60,6 +60,7 @@ umount_all() {
   umount $mnt_dir/dev/ > /dev/null 2>&1 || true
   umount $mnt_dir/proc/ > /dev/null 2>&1 || true
   umount $mnt_dir/sys/ > /dev/null 2>&1 || true
+  umount /dev/shm > /dev/null 2>&1 || true
 }
 
 if [ "$(id -u)" -eq 0 ]; then # rooted
@@ -78,6 +79,7 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
         PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 pkill dbus
 pkill gnome
+pkill xfce
 mkdir -p /run/dbus
 rm -f /var/run/dbus/pid
 dbus-daemon --system --fork
