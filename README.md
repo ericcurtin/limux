@@ -14,21 +14,36 @@ Linux (fedora 35 default) chroot in an Android (work with standard GNU/Linux als
 
 - Configure sshd for termux (optional):
 
-```
+  ```
   pkg install -y openssh
   passwd # set password for current user
   sshd # starts on port 8022 rather than 22
-```
+  ```
 
 - Open termux and run:
 
-  `curl -LO https://raw.githubusercontent.com/ericcurtin/limux/main/limux.sh && chmod +x limux.sh && sudo ./limux.sh`
+  ```
+  curl -LO https://raw.githubusercontent.com/ericcurtin/limux/main/limux.sh && chmod +x limux.sh && sudo ./limux.sh
+  ```
 
 - For each sequent run of the environment, it's simply:
 
-  `sudo ./limux.sh`
+  ```
+  sudo ./limux.sh
+  ```
 
-- In the script there are some commented out steps that will get a UI and sound working with XServer XSDL (optional)
+- It is possible to start a UI with XServer XSDL (optional), but make sure you have installed:
+
+  ```
+  dnf group install -y "Fedora Workstation"
+  dnf install -y gnome-flashback dbus-x11
+  ```
+
+  in the chroot. And XServer XSDL Android Application started. then run:
+
+  ```
+  sudo ./limux.sh fedora:35 ui
+  ```
 
 ![4c5c70a1-8b8f-471a-9296-0b1539ee661f](https://user-images.githubusercontent.com/1694275/148059048-5ecb2416-51fd-40d8-bf89-7b9e9e8c0a4a.png)
 
