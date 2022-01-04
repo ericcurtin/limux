@@ -80,8 +80,8 @@ else # unrooted
   echo "         low performance, use sudo for maximum performance"
 
   LD_PRELOAD= proot --bind=/sys --bind=/proc --bind=/dev/pts --bind=/dev \
-    --root-id --cwd=/ -L --sysvipc --link2symlink --kill-on-exit \
-    --rootfs=$mount_dir /bin/env -i HOME=/root TERM="$TERM" \
+    --bind=$TMPDIR --root-id --cwd=/ -L --sysvipc --link2symlink \
+    --kill-on-exit --rootfs=$mount_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 fi
 
