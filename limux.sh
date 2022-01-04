@@ -60,7 +60,6 @@ umount_all() {
   umount $mnt_dir/dev/ > /dev/null 2>&1 || true
   umount $mnt_dir/proc/ > /dev/null 2>&1 || true
   umount $mnt_dir/sys/ > /dev/null 2>&1 || true
-  umount $mnt_dir/dev/ > /dev/null 2>&1 || true
 }
 
 if [ "$(id -u)" -eq 0 ]; then # rooted
@@ -74,7 +73,7 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
 
   if [ "$2" = "ui" ]; then
       LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
-        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
+        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 pkill dbus
 pkill gnome
 mkdir -p /run/dbus
