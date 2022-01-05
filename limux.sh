@@ -77,9 +77,6 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
   if [ "$2" = "ui" ]; then
       LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
         PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
-pkill dbus
-pkill gnome
-pkill xfce
 mkdir -p /run/dbus
 rm -f /var/run/dbus/pid
 dbus-daemon --system --fork
@@ -98,6 +95,7 @@ else # unrooted
     --bind=$TMPDIR --root-id --cwd=/ -L --sysvipc --link2symlink \
     --kill-on-exit --rootfs=$mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+
 fi
 
 # Run the following for UI and sound
