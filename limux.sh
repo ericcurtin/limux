@@ -11,10 +11,12 @@ else
 fi
 
 if ! command -v sudo > /dev/null; then
-  export DEBIAN_FRONTEND='noninteractive'
-  pkg update -y
-  pkg upgrade -y
-  pkg install -y tsu openssh proot
+  if command -v pkg > /dev/null; then
+    export DEBIAN_FRONTEND='noninteractive'
+    pkg update -y
+    pkg upgrade -y
+    pkg install -y tsu openssh proot
+  fi
 fi
 
 uname_m="$(uname -m)"
@@ -75,6 +77,12 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
   mountpoint -q $mnt_dir$TMPDIR || mount -o bind $TMPDIR $mnt_dir$TMPDIR
 
   if [ "$2" = "ui" ]; then
+      if ! [ -f "$mnt_dir/usr/bin/xfce4-session" ]; then
+        LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
+          PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "dnf group install -y 'Xfce Desktop'
+dnf install -y dbus-x11"
+      fi
+
       LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
         PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 mkdir -p /run/dbus
@@ -97,12 +105,4 @@ else # unrooted
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 
 fi
-
-# Run the following for UI and sound
-# dnf group install -y "Xfce Desktop"
-# dnf install -y dbus-x11
-
-# This is what was installed for the screenshot a different DE was used
-# dnf group install -y "Fedora Workstation"
-# dnf install -y gnome-flashback dbus-x11
 
