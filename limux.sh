@@ -62,7 +62,6 @@ umount_all() {
   umount $mnt_dir/dev/ > /dev/null 2>&1 || true
   umount $mnt_dir/proc/ > /dev/null 2>&1 || true
   umount $mnt_dir/sys/ > /dev/null 2>&1 || true
-  umount /dev/shm > /dev/null 2>&1 || true
 }
 
 if [ "$(id -u)" -eq 0 ]; then # rooted
