@@ -35,11 +35,11 @@ Linux (fedora 35 default, centos stream 9 also available) chroot in an Android (
 - It is possible to start a UI with XServer XSDL (optional), but make sure you have installed:
 
   ```
-  dnf group install -y "Fedora Workstation"
-  dnf install -y gnome-flashback dbus-x11
+  dnf group install -y "Xfce Desktop"
+  dnf install -y dbus-x11
   ```
 
-  in the chroot. And XServer XSDL Android Application started. then run:
+  in the chroot (other DE's work also, including Gnome Flashback, not including Gnome 3). And XServer XSDL Android Application started. then run:
 
   ```
   sudo ./limux.sh fedora:35 ui

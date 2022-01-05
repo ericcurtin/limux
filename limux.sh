@@ -83,7 +83,7 @@ pkill xfce
 mkdir -p /run/dbus
 rm -f /var/run/dbus/pid
 dbus-daemon --system --fork
-dbus-launch --exit-with-session /usr/libexec/gnome-flashback-metacity > /dev/null 2>&1 &"
+dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &"
   fi
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
@@ -101,6 +101,10 @@ else # unrooted
 fi
 
 # Run the following for UI and sound
+# dnf group install -y "Xfce Desktop"
+# dnf install -y dbus-x11
+
+# This is what was installed for the screenshot a different DE was used
 # dnf group install -y "Fedora Workstation"
 # dnf install -y gnome-flashback dbus-x11
 
