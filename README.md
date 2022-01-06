@@ -32,7 +32,7 @@ Linux (fedora 35 default, centos stream 9 also available) chroot in an Android (
   sudo ./limux.sh
   ```
 
-- It is possible to start a UI with XServer XSDL (optional):
+- It is possible to start a UI with XServer XSDL app, make sure you start XSDL app first (optional):
 
   ```
   sudo ./limux.sh fedora:35 ui
