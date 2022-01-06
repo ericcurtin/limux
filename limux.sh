@@ -78,20 +78,44 @@ if [ "$(id -u)" -eq 0 ]; then # rooted
   if [ "$2" = "ui" ]; then
       if ! [ -f "$mnt_dir/usr/bin/xfce4-session" ]; then
         LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
-          PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "dnf group install -y 'Xfce Desktop'
+          PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "dnf group install -y 'Xfce Desktop' --exclude kernel-core --skip-broken
 dnf install -y dbus-x11"
       fi
 
       LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
-        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
+        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 # from XServer XSDL
 mkdir -p /run/dbus
-rm -f /var/run/dbus/pid
+pidfile="/var/run/dbus/pid"
+if [ ! -f "$pidfile" ]; then
+  exit 0
+fi
+
+pid="`cat "$pidfile"`"
+if ! grep -q "^dbus-daemon" "/proc/$pid/cmdline" 2>/dev/null; then
+  exit 0
+fi
+
+kill $pid
+rm -f $pidfile
 dbus-daemon --system --fork
-dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &"
+dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &'
   fi
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+
+  LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'pidfile="/var/run/dbus/pid"
+if [ ! -f "$pidfile" ]; then
+  exit 0
+fi
+
+pid="`cat "$pidfile"`"
+if ! grep -q "^dbus-daemon" "/proc/$pid/cmdline" 2>/dev/null; then
+  exit 0
+fi
+
+kill $pid'
 
   umount_all
 else # unrooted
