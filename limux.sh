@@ -104,6 +104,13 @@ kill $pid > /dev/null 2>&1'
 
   umount_all
 else # unrooted
+  if [ "$2" = "ui" ]; then
+    echo "Warning: UI not supported in the unrooted version of this script,"
+    echo "         use sudo for UI. You can run without a UI unrooted, but"
+    echo "         with lower performance"
+    exit 0
+  fi
+
   echo "Warning: you are using the unrooted version of this script,"
   echo "         low performance, use sudo for maximum performance"
 
