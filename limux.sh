@@ -38,7 +38,6 @@ if ! [ -f "$mnt_dir_parent/$fn" ]; then
     url="https://cloud.$distro.org/$distro/$rel-stream/$uname_m/images"
   fi
 
-  echo "$url/$fn"
   curl -OL $url/$fn
   cd - > /dev/null
 fi
@@ -67,7 +66,7 @@ umount_all() {
 if [ "$(id -u)" -eq 0 ]; then # rooted
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'pidfile="/var/run/dbus/pid"
-pid="`cat "$pidfile" 2> /dev/null`"
+pid="`cat "$pidfile" > /dev/null 2>&1`"
 kill -9 $pid > /dev/null 2>&1 || true
 rm -f $pidfile'
   umount_all
@@ -92,6 +91,19 @@ dnf install -y dbus-x11"
 mkdir -p /run/dbus
 dbus-daemon --system --fork
 dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &'
+  elif [ "$2" = "ssh" ]; then
+      if ! [ -f "$mnt_dir/usr/sbin/sshd" ]; then
+        sshd_config="/etc/ssh/sshd_config"
+        LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
+          PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c "dnf install -y openssh-server
+sed -i -E 's/#?PasswordAuthentication .*/PasswordAuthentication yes/g' $sshd_config
+sed -i -E 's/#?PermitRootLogin .*/PermitRootLogin yes/g' $sshd_config
+ssh-keygen -A >/dev/null"
+        cp -r ~/../.ssh $mnt_dir/root/
+      fi
+
+      LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
+        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c '/usr/sbin/sshd'
   fi
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
@@ -99,6 +111,9 @@ dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &'
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'pidfile="/var/run/dbus/pid"
+pid="`cat "$pidfile" 2> /dev/null`"
+kill $pid > /dev/null 2>&1 || true
+pidfile="/run/sshd.pid"
 pid="`cat "$pidfile" 2> /dev/null`"
 kill $pid > /dev/null 2>&1 || true'
 
