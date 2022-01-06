@@ -67,8 +67,8 @@ umount_all() {
 if [ "$(id -u)" -eq 0 ]; then # rooted
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'pidfile="/var/run/dbus/pid"
-pid="`cat "$pidfile"`"
-kill -9 $pid
+pid="`cat "$pidfile" 2> /dev/null`"
+kill -9 $pid > /dev/null 2>&1
 rm -f $pidfile'
   umount_all
 
@@ -99,8 +99,8 @@ dbus-launch --exit-with-session xfce4-session > /dev/null 2>&1 &'
 
   LD_PRELOAD= chroot $mnt_dir /bin/env -i HOME=/root TERM="$TERM" \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login -c 'pidfile="/var/run/dbus/pid"
-pid="`cat "$pidfile"`"
-kill $pid'
+pid="`cat "$pidfile" 2> /dev/null`"
+kill $pid > /dev/null 2>&1'
 
   umount_all
 else # unrooted
