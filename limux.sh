@@ -20,6 +20,11 @@ if ! command -v sudo > /dev/null; then
 fi
 
 uname_m="$(uname -m)"
+if [ "$uname_m" != "aarch64" ] && [ "$uname_m" != "x86_64" ]; then
+  echo "only aarch64 and x86_64 supported"
+  exit 1
+fi
+
 mnt_dir_parent="$HOME/.limux/$distro/$rel/$uname_m"
 mnt_dir="$mnt_dir_parent/fs"
 
@@ -125,9 +130,6 @@ else # unrooted
     echo "         with lower performance"
     exit 0
   fi
-
-  echo "Warning: you are using the unrooted version of this script,"
-  echo "         low performance, use sudo for maximum performance"
 
   LD_PRELOAD= proot --bind=/sys --bind=/proc --bind=/dev/pts --bind=/dev \
     --bind=$TMPDIR --root-id --cwd=/ -L --sysvipc --link2symlink \

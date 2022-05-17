@@ -4,7 +4,8 @@ Linux (fedora 35 default, centos stream 9 also available) chroot in an Android (
 
 # To install and use
 
-- rooted phone, this is device specific on how to complete. Many Android devices get wiped clean when you unlock the bootloader (such as my Moto G 5G Plus) or root the phone, so back up your data. It's a security feature. Technically this is optional, but the unrooted version does not perform as well and cannot run UI.
+- phone with 64-bit OS, to check `uname -m` should read aarch64. We do support x86_64 also.
+- (optional) rooted phone, this is device specific on how to complete. Many Android devices get wiped clean when you unlock the bootloader (such as my Moto G 5G Plus) or root the phone, so back up your data. It's a security feature. Technically this is optional, but the rooted version performs better and can run UI.
 
 - Download and install open source app store F-Droid:
 
