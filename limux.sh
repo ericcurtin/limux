@@ -31,6 +31,8 @@ mnt_dir="$mnt_dir_parent/fs"
 mkdir -p $mnt_dir_parent
 if [ "$distro" = "fedora" ]; then
   fn="Fedora-Container-Base-$rel-1.2.$uname_m.tar.xz"
+elif [ "$distro" = "autosd" ]; then
+  fn="auto-osbuild-cs9-minimal-regular-aarch64.tar.xz"
 else
   fn="CentOS-Stream-Container-Base-$rel-20211222.0.$uname_m.tar.xz"
 fi
@@ -39,6 +41,8 @@ if ! [ -f "$mnt_dir_parent/$fn" ]; then
   cd $mnt_dir_parent
   if [ "$distro" = "fedora" ]; then
     url="https://download.fedoraproject.org/pub/$distro/linux/releases/$rel/Container/$uname_m/images"
+  elif [ "$distro" = "autosd" ]; then
+    url="https://github.com/ericcurtin/limux/releases/download/0.0"
   else
     url="https://cloud.$distro.org/$distro/$rel-stream/$uname_m/images"
   fi
